@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Dynamic Page</title>
+  <style>
+    :root {
+      --bg-light: linear-gradient(135deg, #e0f2fe, #f5f3ff);
+      --bg-dark: linear-gradient(135deg, #1e293b, #0f172a);
+      --text-light: #0f172a;
+      --text-dark: #f1f5f9;
+      --accent: #3b82f6;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: all 0.4s ease;
+    }
+
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .card {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(12px);
+      transition: background 0.4s ease;
+    }
+
+    body.dark .card {
+      background: rgba(30, 41, 59, 0.7);
+    }
+
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: 2.2rem;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+    }
+
+    #clock {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+      font-weight: bold;
+    }
+
+    button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: #2563eb;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Hello, I'm <span> Lucky</span></h1>
+    <p id="greeting">Welcome to my page!</p>
+    <div id="clock"></div>
+    <button id="toggle">Toggle Dark Mode</button>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").textContent = now.toLocaleTimeString();
+
+      const hours = now.getHours();
+      let greet = "Hello";
+      if (document.body.classList.contains("dark")) {
+        greet = "Good Night 🌙";
+      } else if (hours < 12) {
+        greet = "Good Morning 🌞";
+      } else if (hours < 18) {
+        greet = "Good Afternoon ☀️";
+      } else {
+        greet = "Good Evening 🌆";
+      }
+      document.getElementById("greeting").textContent = greet;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    document.getElementById("toggle").addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      updateClock();
+    });
+  </script>
+</body>
+</html>
