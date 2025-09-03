@@ -91,30 +91,28 @@
 
   <script>
     function updateClock() {
-      const now = new Date();
-      document.getElementById("clock").textContent = now.toLocaleTimeString();
+    const now = new Date();
+    document.getElementById("clock").textContent = now.toLocaleTimeString();
 
-      const hours = now.getHours();
-      let greet = "Hello";
-      if (document.body.classList.contains("dark")) {
-        greet = "Good Night 🌙";
-      } else if (hours < 12) {
-        greet = "Good Morning 🌞";
-      } else if (hours < 18) {
-        greet = "Good Afternoon ☀️";
-      } else {
-        greet = "Good Evening 🌆";
-      }
-      document.getElementById("greeting").textContent = greet;
+    const hours = now.getHours();
+    let greet = "Hello";
+    if (hours < 12) {
+      greet = "Good Morning 🌞";
+    } else if (hours < 18) {
+      greet = "Good Afternoon ☀️";
+    } else {
+      greet = "Good Evening 🌆";
     }
+    document.getElementById("greeting").textContent = greet;
+  }
 
-    setInterval(updateClock, 1000);
-    updateClock();
+  setInterval(updateClock, 1000);
+  updateClock();
 
-    document.getElementById("toggle").addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-      updateClock();
-    });
+  document.getElementById("toggle").addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+  });
+    
   </script>
 </body>
 </html>
